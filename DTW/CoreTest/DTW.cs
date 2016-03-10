@@ -28,5 +28,12 @@ namespace CoreTest
         {
             Core.DTW<Double> dtw = new Core.DTW<Double>();
         }
+
+        [TestMethod]
+        public void Empty()
+        {
+            Core.DTW<Double> dtw = new DTW<Double>();
+            Assert.AreEqual(0.0, dtw.GetResult());
+        }
     }
 }
