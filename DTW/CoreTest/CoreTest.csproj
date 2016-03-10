@@ -53,6 +53,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DTW.cs" />
+    <Compile Include="IDistansable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
