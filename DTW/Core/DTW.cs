@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core
 {
-    public class DTW
+    public class DTW<T> where T : IDistansable
     {
     }
 }
