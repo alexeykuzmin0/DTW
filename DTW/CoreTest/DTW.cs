@@ -44,5 +44,13 @@ namespace CoreTest
             DTW<Double> dtw = new DTW<Double>(Enumerable.Repeat(new Double(0.0), 1));
             Assert.AreEqual(double.PositiveInfinity, dtw.GetResult());
         }
+
+        [TestMethod]
+        public void ProcessOne()
+        {
+            DTW<Double> dtw = new DTW<Double>(Enumerable.Repeat(new Double(0.0), 1));
+            dtw.Process(new Double(1));
+            Assert.AreEqual(1.0, dtw.GetResult());
+        }
     }
 }
