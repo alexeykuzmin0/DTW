@@ -8,5 +8,9 @@ namespace Core
 {
     public class DTW<T> where T : IDistansable
     {
+        public double GetResult()
+        {
+            return 0.0;
+        }
     }
 }
