@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -33,8 +34,15 @@ namespace CoreTest
         [TestMethod]
         public void Empty()
         {
-            Core.DTW<Double> dtw = new DTW<Double>(new List<Double>());
+            DTW<Double> dtw = new DTW<Double>(new List<Double>());
             Assert.AreEqual(0.0, dtw.GetResult());
+        }
+
+        [TestMethod]
+        public void HalfEmpty()
+        {
+            DTW<Double> dtw = new DTW<Double>(Enumerable.Repeat(new Double(0.0), 1));
+            Assert.AreEqual(double.PositiveInfinity, dtw.GetResult());
         }
     }
 }
