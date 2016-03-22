@@ -27,7 +27,7 @@ namespace Core
             for (int i = 0; i < pattern.Count(); ++i)
             {
                 dp.Last().Add(Math.Min(dp[dp.Count() - 2][i + 1],
-                    Math.Min(dp[dp.Count() - 2][i], dp.Last()[i]) + pattern[i].DistanceTo(input)));
+                    Math.Min(dp[dp.Count() - 2][i], dp.Last()[i])) + pattern[i].DistanceTo(input));
             }
         }
 

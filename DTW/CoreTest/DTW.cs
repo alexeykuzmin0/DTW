@@ -52,5 +52,20 @@ namespace CoreTest
             dtw.Process(new Double(1));
             Assert.AreEqual(1.0, dtw.GetResult());
         }
+
+        [TestMethod]
+        public void ComplicatedPath()
+        {
+            List<Double> pattern = new List<Double>();
+            pattern.Add(new Double(0));
+            pattern.Add(new Double(100));
+            DTW<Double> dtw = new DTW<Double>(pattern);
+            dtw.Process(new Double(0));
+            Assert.AreEqual(100.0, dtw.GetResult());
+            dtw.Process(new Double(1));
+            Assert.AreEqual(99.0, dtw.GetResult());
+            dtw.Process(new Double(100));
+            Assert.AreEqual(1.0, dtw.GetResult());
+        }
     }
 }
