@@ -34,5 +34,19 @@ namespace Finance
             low = rhs.low;
             close = rhs.close;
         }
+
+        public static bool operator == (Candle lhs, Candle rhs)
+        {
+            return (lhs.timestamp == rhs.timestamp) &&
+                (lhs.open == rhs.open) &&
+                (lhs.high == rhs.high) &&
+                (lhs.low == rhs.low) &&
+                (lhs.close == rhs.close);
+        }
+
+        public static bool operator != (Candle lhs, Candle rhs)
+        {
+            return !(lhs == rhs);
+        }
     }
 }

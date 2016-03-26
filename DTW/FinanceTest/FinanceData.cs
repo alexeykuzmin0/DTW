@@ -59,7 +59,7 @@ namespace FinanceTest
             var b = new Finance.Candle(captions, values);
             var e = new Finance.Candle(b);
             var c0 = new Finance.Candle(b);
-            c0.timestamp.AddDays(1);
+            c0.timestamp = c0.timestamp.AddDays(1);
             var c1 = new Finance.Candle(b);
             c1.open = 1;
             var c2 = new Finance.Candle(b);
