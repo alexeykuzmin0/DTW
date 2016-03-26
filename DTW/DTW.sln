@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finance", "Finance\Finance.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceTest", "FinanceTest\FinanceTest.csproj", "{C49EFEAF-FDE5-4288-8D7E-DBB8A13CBD30}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUIComponents", "GUIComponenets\GUIComponents.csproj", "{EFDC92BA-9585-47D6-9208-83F131C9251D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUIComponentsTest", "GUIComponentsTest\GUIComponentsTest.csproj", "{2BA84C50-68C5-402E-910D-4AC2F4513085}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{C49EFEAF-FDE5-4288-8D7E-DBB8A13CBD30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C49EFEAF-FDE5-4288-8D7E-DBB8A13CBD30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C49EFEAF-FDE5-4288-8D7E-DBB8A13CBD30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFDC92BA-9585-47D6-9208-83F131C9251D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFDC92BA-9585-47D6-9208-83F131C9251D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFDC92BA-9585-47D6-9208-83F131C9251D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFDC92BA-9585-47D6-9208-83F131C9251D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BA84C50-68C5-402E-910D-4AC2F4513085}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BA84C50-68C5-402E-910D-4AC2F4513085}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BA84C50-68C5-402E-910D-4AC2F4513085}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BA84C50-68C5-402E-910D-4AC2F4513085}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
