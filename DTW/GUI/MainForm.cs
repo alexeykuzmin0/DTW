@@ -12,7 +12,7 @@ namespace GUI
 {
     public partial class MainForm : Form
     {
-        Finance.CandleTokenizer ct;
+        Finance.AbstractCandleTokenizer ct;
         public MainForm()
         {
             InitializeComponent();
@@ -22,8 +22,17 @@ namespace GUI
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                ct = new Finance.CandleTokenizer(
-                    new System.IO.StreamReader(openFileDialog1.FileName));
+                if ((object)ct == null)
+                {
+                    ct = new Finance.CandleTokenizer(
+                        new System.IO.StreamReader(openFileDialog1.FileName));
+                }
+                else
+                {
+                    var ct2 = new Finance.CandleTokenizer(
+                        new System.IO.StreamReader(openFileDialog1.FileName));
+                    ct = new Finance.DisjointMergeCandleTokenizer(ct, ct2);
+                }
                 toolStripStatusLabel1.Text = "Loaded " + openFileDialog1.FileName;
             }
         }
