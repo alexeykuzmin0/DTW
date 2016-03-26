@@ -47,6 +47,11 @@ namespace Finance
             }
         }
 
+        public static Task<CandleTokenizer> CreateAsync(System.IO.StreamReader sr)
+        {
+            return Task<CandleTokenizer>.Run(() => { return new CandleTokenizer(sr); });
+        }
+
         private static void CheckCaptions(Dictionary<string, int> ids)
         {
             if (!ids.ContainsKey("<DATE>") ||
