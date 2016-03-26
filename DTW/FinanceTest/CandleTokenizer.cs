@@ -75,5 +75,23 @@ namespace FinanceTest
             Assert.AreEqual("20150105;100100;54.03;54.4;53.61;53.99", line2);
             Assert.AreEqual("20150105;100200;53.99;54.05;53.72;53.72", line3);
         }
+
+        [TestMethod]
+        public async System.Threading.Tasks.Task SaveAsync()
+        {
+            Finance.CandleTokenizer ct = new Finance.CandleTokenizer(
+                new System.IO.StreamReader(GenerateStream(SAMPLE)));
+            var ms = new System.IO.MemoryStream();
+            await ct.SaveAsync(new System.IO.StreamWriter(ms));
+            ms.Seek(0, System.IO.SeekOrigin.Begin);
+            var sr = new System.IO.StreamReader(ms);
+            var line1 = sr.ReadLine();
+            var line2 = sr.ReadLine();
+            var line3 = sr.ReadLine();
+            Assert.AreEqual(true, sr.EndOfStream);
+            Assert.AreEqual("<DATE>;<TIME>;<OPEN>;<HIGH>;<LOW>;<CLOSE>", line1);
+            Assert.AreEqual("20150105;100100;54.03;54.4;53.61;53.99", line2);
+            Assert.AreEqual("20150105;100200;53.99;54.05;53.72;53.72", line3);
+        }
     }
 }

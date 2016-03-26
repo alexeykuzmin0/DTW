@@ -26,6 +26,11 @@ namespace Finance
             streamWriter.Flush();
             streamWriter.Close();
         }
+
+        public Task SaveAsync(StreamWriter sw)
+        {
+            return Task.Run(() => Save(sw));
+        }
     }
 
     public class CandleTokenizer : AbstractCandleTokenizer
