@@ -48,6 +48,17 @@ namespace FinanceTest
         }
 
         [TestMethod]
+        public void FabricMethod()
+        {
+            var ct = await Finance.CandleTokenizer.Create(new System.IO.StreamReader(GenerateStream(SAMPLE)));
+            var c1 = new Finance.Candle(new DateTime(2015, 1, 5, 10, 1, 0), 54.03, 54.4, 53.61, 53.99);
+            var c2 = new Finance.Candle(new DateTime(2015, 1, 5, 10, 2, 0), 53.99, 54.05, 53.72, 53.72);
+            Assert.AreEqual(2, ct.GetLength());
+            Assert.AreEqual(c1, ct[0]);
+            Assert.AreEqual(c2, ct[1]);
+        }
+
+        [TestMethod]
         public void Save()
         {
             Finance.CandleTokenizer ct = new Finance.CandleTokenizer(
