@@ -60,12 +60,23 @@ namespace Finance
 
         public override bool Equals(object o)
         {
-            var rhs = (Candle)o;
-            if (rhs == null)
+            try
+            {
+                var rhs = (Candle)o;
+                if ((object)rhs == null)
+                {
+                    return false;
+                }
+                return this == rhs;
+            }
+            catch (System.InvalidCastException)
             {
                 return false;
             }
-            return this == rhs;
+            catch
+            {
+                throw;
+            }
         }
 
         public override int GetHashCode()

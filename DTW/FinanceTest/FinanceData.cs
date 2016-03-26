@@ -86,5 +86,38 @@ namespace FinanceTest
             Assert.AreEqual(false, b == c3);
             Assert.AreEqual(false, b == c4);
         }
+
+        [TestMethod]
+        public void Equals()
+        {
+            var captions = new System.Collections.Generic.Dictionary<string, int>();
+            captions["<DATE>"] = 0;
+            captions["<TIME>"] = 1;
+            captions["<OPEN>"] = 2;
+            captions["<HIGH>"] = 3;
+            captions["<LOW>"] = 4;
+            captions["<CLOSE>"] = 5;
+            string[] values = "20150105;100100;54.0300000;54.4000000;53.6100000;53.9900000;784480".Split(';');
+            var b = new Finance.Candle(captions, values);
+            var e = new Finance.Candle(b);
+            var c0 = new Finance.Candle(b);
+            c0.timestamp = c0.timestamp.AddDays(1);
+            var c1 = new Finance.Candle(b);
+            c1.open = 1;
+            var c2 = new Finance.Candle(b);
+            c2.high = 1;
+            var c3 = new Finance.Candle(b);
+            c3.low = 1;
+            var c4 = new Finance.Candle(b);
+            c4.close = 1;
+            Assert.AreEqual(true, b.Equals(e));
+            Assert.AreEqual(false, b.Equals(c0));
+            Assert.AreEqual(false, b.Equals(c1));
+            Assert.AreEqual(false, b.Equals(c2));
+            Assert.AreEqual(false, b.Equals(c3));
+            Assert.AreEqual(false, b.Equals(c4));
+            Assert.AreEqual(false, b.Equals(1));
+            Assert.AreEqual(false, b.Equals(null));
+        }
     }
 }
