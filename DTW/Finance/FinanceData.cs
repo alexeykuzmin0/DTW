@@ -35,6 +35,15 @@ namespace Finance
             close = rhs.close;
         }
 
+        public Candle(DateTime timestamp, double open, double high, double low, double close)
+        {
+            this.timestamp = timestamp;
+            this.open = open;
+            this.high = high;
+            this.low = low;
+            this.close = close;
+        }
+
         public static bool operator == (Candle lhs, Candle rhs)
         {
             return (lhs.timestamp == rhs.timestamp) &&
