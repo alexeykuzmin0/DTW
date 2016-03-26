@@ -57,5 +57,29 @@ namespace Finance
         {
             return !(lhs == rhs);
         }
+
+        public override bool Equals(object o)
+        {
+            var rhs = (Candle)o;
+            if (rhs == null)
+            {
+                return false;
+            }
+            return this == rhs;
+        }
+
+        public override int GetHashCode()
+        {
+            int ans = timestamp.GetHashCode();
+            const int BASE = 239017;
+            unchecked
+            {
+                ans = ans * BASE + open.GetHashCode();
+                ans = ans * BASE + high.GetHashCode();
+                ans = ans * BASE + low.GetHashCode();
+                ans = ans * BASE + close.GetHashCode();
+            }
+            return ans;
+        }
     }
 }
