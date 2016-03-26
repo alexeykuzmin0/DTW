@@ -27,5 +27,10 @@ namespace GUI
                 toolStripStatusLabel1.Text = "Loaded " + openFileDialog1.FileName;
             }
         }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
