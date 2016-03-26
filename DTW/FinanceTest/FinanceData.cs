@@ -119,5 +119,25 @@ namespace FinanceTest
             Assert.AreEqual(false, b.Equals(1));
             Assert.AreEqual(false, b.Equals(null));
         }
+
+        public void GetHashCode()
+        {
+            DateTime timestamp = new DateTime(2015, 1, 5, 10, 1, 0);
+            double open = 54.03;
+            double high = 54.4;
+            double low = 53.61;
+            double close = 53.99;
+            Finance.Candle c = new Finance.Candle(timestamp, open, high, low, close);
+            int hash;
+            unchecked
+            {
+                hash = ((((timestamp.GetHashCode()
+                    * 239017) + open.GetHashCode())
+                    * 239017 + high.GetHashCode())
+                    * 239017 + low.GetHashCode())
+                    * 239017 + close.GetHashCode();
+            }
+            Assert.AreEqual(hash, c.GetHashCode());
+        }
     }
 }
