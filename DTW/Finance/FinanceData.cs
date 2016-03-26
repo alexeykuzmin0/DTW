@@ -25,5 +25,14 @@ namespace Finance
             low = Convert.ToDouble(values[captions["<LOW>"]], provider);
             close = Convert.ToDouble(values[captions["<CLOSE>"]], provider);
         }
+
+        public Candle(Candle rhs)
+        {
+            timestamp = rhs.timestamp;
+            open = rhs.open;
+            high = rhs.high;
+            low = rhs.low;
+            close = rhs.close;
+        }
     }
 }
