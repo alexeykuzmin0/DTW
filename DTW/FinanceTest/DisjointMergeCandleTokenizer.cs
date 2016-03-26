@@ -51,5 +51,19 @@ namespace FinanceTest
             Assert.AreEqual(c1, ct[0]);
             Assert.AreEqual(c2, ct[1]);
         }
+
+        [TestMethod]
+        public void Candles2()
+        {
+            var ct1 = new Finance.CandleTokenizer(
+                new System.IO.StreamReader(CandleTokenizer.GenerateStream(SAMPLE1)));
+            var ct2 = new Finance.CandleTokenizer(
+                new System.IO.StreamReader(CandleTokenizer.GenerateStream(SAMPLE2)));
+            var ct = new Finance.DisjointMergeCandleTokenizer(ct2, ct1);
+            var c1 = new Finance.Candle(new DateTime(2015, 1, 5, 10, 1, 0), 54.03, 54.4, 53.61, 53.99);
+            var c2 = new Finance.Candle(new DateTime(2015, 1, 5, 10, 2, 0), 53.99, 54.05, 53.72, 53.72);
+            Assert.AreEqual(c1, ct[0]);
+            Assert.AreEqual(c2, ct[1]);
+        }
     }
 }
