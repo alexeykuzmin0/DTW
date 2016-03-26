@@ -18,18 +18,19 @@ namespace GUI
             InitializeComponent();
         }
 
-        private void openDataToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void openDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                if ((object)ct == null)
+                toolStripStatusLabel1.Text = "Loading...";
+                if (ct == null)
                 {
-                    ct = new Finance.CandleTokenizer(
+                    ct = await Finance.CandleTokenizer.CreateAsync(
                         new System.IO.StreamReader(openFileDialog1.FileName));
                 }
                 else
                 {
-                    var ct2 = new Finance.CandleTokenizer(
+                    var ct2 = await Finance.CandleTokenizer.CreateAsync(
                         new System.IO.StreamReader(openFileDialog1.FileName));
                     ct = new Finance.DisjointMergeCandleTokenizer(ct, ct2);
                 }
@@ -46,6 +47,7 @@ namespace GUI
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                toolStripStatusLabel1.Text = "Saving...";
                 ct.Save(new System.IO.StreamWriter(saveFileDialog1.FileName));
                 toolStripStatusLabel1.Text = "Saved " + saveFileDialog1.FileName;
             }
