@@ -45,6 +45,7 @@ namespace Finance
                 string[] line = sr.ReadLine().Split(';');
                 candles.Add(new Candle(ids, line));
             }
+            sr.Close();
         }
 
         public static Task<CandleTokenizer> CreateAsync(System.IO.StreamReader sr)
