@@ -46,6 +46,14 @@ namespace Finance
 
         public static bool operator == (Candle lhs, Candle rhs)
         {
+            if ((object)lhs == null)
+            {
+                return (object)rhs == null;
+            }
+            if ((object)rhs == null)
+            {
+                return false;
+            }
             return (lhs.timestamp == rhs.timestamp) &&
                 (lhs.open == rhs.open) &&
                 (lhs.high == rhs.high) &&
@@ -63,7 +71,7 @@ namespace Finance
             try
             {
                 var rhs = (Candle)o;
-                if ((object)rhs == null)
+                if (rhs == null)
                 {
                     return false;
                 }

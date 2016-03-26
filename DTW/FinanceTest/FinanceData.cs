@@ -85,6 +85,8 @@ namespace FinanceTest
             Assert.AreEqual(false, b == c2);
             Assert.AreEqual(false, b == c3);
             Assert.AreEqual(false, b == c4);
+            Assert.AreEqual(false, b == null);
+            Assert.AreEqual(true, ((Candle)null) == null);
         }
 
         [TestMethod]
