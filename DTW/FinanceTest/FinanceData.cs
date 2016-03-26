@@ -170,5 +170,17 @@ namespace FinanceTest
             }
             Assert.AreEqual(hash, c.GetHashCode());
         }
+
+        [TestMethod]
+        public void ToString()
+        {
+            DateTime timestamp = new DateTime(2015, 1, 5, 10, 1, 0);
+            double open = 54.03;
+            double high = 54.4;
+            double low = 53.61;
+            double close = 53.99;
+            Finance.Candle c = new Finance.Candle(timestamp, open, high, low, close);
+            Assert.AreEqual("20150105;100100;54.03;54.4;53.61;53.99", c.ToString());
+        }
     }
 }
