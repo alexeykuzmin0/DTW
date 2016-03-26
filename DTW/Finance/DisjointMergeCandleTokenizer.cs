@@ -14,6 +14,13 @@ namespace Finance
         {
             first = lhs;
             second = rhs;
+            if (first.GetLength() > 0 && second.GetLength() > 0 &&
+                first[0].timestamp > second[0].timestamp)
+            {
+                var tmp = first;
+                first = second;
+                second = tmp;
+            }
         }
 
         public override Candle this[int index]
