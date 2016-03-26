@@ -38,5 +38,18 @@ namespace Finance
                 throw new FormatException("CSV file contains not all required columns");
             }
         }
+
+        public int GetLength()
+        {
+            return candles.Count;
+        }
+
+        public Candle this[int index]
+        {
+            get
+            {
+                return candles[index];
+            }
+        }
     }
 }
