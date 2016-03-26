@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace Finance
 {
-    public class DisjointMergeCandleTokenizer : ICandleTokenizer
+    public class DisjointMergeCandleTokenizer : AbstractCandleTokenizer
     {
-        ICandleTokenizer first, second;
+        AbstractCandleTokenizer first, second;
 
-        public DisjointMergeCandleTokenizer(ICandleTokenizer lhs, ICandleTokenizer rhs)
+        public DisjointMergeCandleTokenizer(AbstractCandleTokenizer lhs, AbstractCandleTokenizer rhs)
         {
             first = lhs;
             second = rhs;
         }
 
-        public Candle this[int index]
+        public override Candle this[int index]
         {
             get
             {
@@ -28,7 +28,7 @@ namespace Finance
             }
         }
 
-        public int GetLength()
+        public override int GetLength()
         {
             return first.GetLength() + second.GetLength();
         }

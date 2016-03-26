@@ -7,17 +7,27 @@ using System.Threading.Tasks;
 
 namespace Finance
 {
-    public interface ICandleTokenizer
+    public abstract class AbstractCandleTokenizer
     {
-        int GetLength();
+        public abstract int GetLength();
 
-        Candle this[int index]
+        public abstract Candle this[int index]
         {
             get;
         }
+
+        public void Save(StreamWriter streamWriter)
+        {
+            streamWriter.WriteLine("<DATE>;<TIME>;<OPEN>;<HIGH>;<LOW>;<CLOSE>");
+            for (int i = 0; i < GetLength(); ++i)
+            {
+                streamWriter.WriteLine(this[i].ToString());
+            }
+            streamWriter.Flush();
+        }
     }
 
-    public class CandleTokenizer : ICandleTokenizer
+    public class CandleTokenizer : AbstractCandleTokenizer
     {
         List<Candle> candles;
         public CandleTokenizer(System.IO.StreamReader sr)
@@ -50,27 +60,17 @@ namespace Finance
             }
         }
 
-        public int GetLength()
+        public override int GetLength()
         {
             return candles.Count;
         }
 
-        public Candle this[int index]
+        public override Candle this[int index]
         {
             get
             {
                 return candles[index];
             }
-        }
-
-        public void Save(StreamWriter streamWriter)
-        {
-            streamWriter.WriteLine("<DATE>;<TIME>;<OPEN>;<HIGH>;<LOW>;<CLOSE>");
-            foreach (var c in candles)
-            {
-                streamWriter.WriteLine(c.ToString());
-            }
-            streamWriter.Flush();
         }
     }
 }
