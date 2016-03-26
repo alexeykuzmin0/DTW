@@ -27,5 +27,24 @@ namespace FinanceTest
             Finance.CandleTokenizer ct = new Finance.CandleTokenizer(
                 new System.IO.StreamReader(GenerateStream(SAMPLE)));
         }
+
+        [TestMethod]
+        public void GetLength()
+        {
+            Finance.CandleTokenizer ct = new Finance.CandleTokenizer(
+                new System.IO.StreamReader(GenerateStream(SAMPLE)));
+            Assert.AreEqual(2, ct.GetLength());
+        }
+
+        [TestMethod]
+        public void Candles()
+        {
+            Finance.CandleTokenizer ct = new Finance.CandleTokenizer(
+                new System.IO.StreamReader(GenerateStream(SAMPLE)));
+            var c1 = new Finance.Candle(new DateTime(2015, 1, 5, 10, 1, 0), 54.03, 54.4, 53.61, 53.99);
+            var c2 = new Finance.Candle(new DateTime(2015, 1, 5, 10, 2, 0), 53.99, 54.05, 53.72, 53.72);
+            Assert.AreEqual(c1, ct[0]);
+            Assert.AreEqual(c2, ct[1]);
+        }
     }
 }
