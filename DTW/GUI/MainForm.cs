@@ -52,5 +52,10 @@ namespace GUI
                 toolStripStatusLabel1.Text = "Saved " + saveFileDialog1.FileName;
             }
         }
+
+        private void clearDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ct = null;
+        }
     }
 }
