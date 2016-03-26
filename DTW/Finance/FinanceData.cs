@@ -92,5 +92,16 @@ namespace Finance
             }
             return ans;
         }
+
+        public override string ToString()
+        {
+            var provider = new System.Globalization.NumberFormatInfo() { NumberDecimalSeparator = "." };
+            return timestamp.ToString("yyyyMMdd") + ";" +
+                timestamp.ToString("HHmmss") + ";" +
+                open.ToString(provider) + ";" +
+                high.ToString(provider) + ";" +
+                low.ToString(provider) + ";" +
+                close.ToString(provider);
+        }
     }
 }
