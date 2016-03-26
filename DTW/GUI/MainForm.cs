@@ -32,5 +32,14 @@ namespace GUI
         {
             Application.Exit();
         }
+
+        private void saveDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                ct.Save(new System.IO.StreamWriter(saveFileDialog1.FileName));
+                toolStripStatusLabel1.Text = "Saved " + saveFileDialog1.FileName;
+            }
+        }
     }
 }

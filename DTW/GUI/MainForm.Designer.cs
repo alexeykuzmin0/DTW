@@ -74,6 +74,7 @@
             this.saveDataToolStripMenuItem.Name = "saveDataToolStripMenuItem";
             this.saveDataToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.saveDataToolStripMenuItem.Text = "&Save data";
+            this.saveDataToolStripMenuItem.Click += new System.EventHandler(this.saveDataToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
