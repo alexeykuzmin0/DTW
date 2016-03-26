@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,6 +51,16 @@ namespace Finance
             {
                 return candles[index];
             }
+        }
+
+        public void Save(StreamWriter streamWriter)
+        {
+            streamWriter.WriteLine("<DATE>;<TIME>;<OPEN>;<HIGH>;<LOW>;<CLOSE>");
+            foreach (var c in candles)
+            {
+                streamWriter.WriteLine(c.ToString());
+            }
+            streamWriter.Flush();
         }
     }
 }

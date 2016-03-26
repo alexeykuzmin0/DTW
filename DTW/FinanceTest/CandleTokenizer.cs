@@ -54,6 +54,7 @@ namespace FinanceTest
                 new System.IO.StreamReader(GenerateStream(SAMPLE)));
             var ms = new System.IO.MemoryStream();
             ct.Save(new System.IO.StreamWriter(ms));
+            ms.Seek(0, System.IO.SeekOrigin.Begin);
             var sr = new System.IO.StreamReader(ms);
             var line1 = sr.ReadLine();
             var line2 = sr.ReadLine();
