@@ -24,7 +24,6 @@ namespace Finance
                 streamWriter.WriteLine(this[i].ToString());
             }
             streamWriter.Flush();
-            streamWriter.Close();
         }
 
         public Task SaveAsync(StreamWriter sw)
