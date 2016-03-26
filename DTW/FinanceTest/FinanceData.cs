@@ -151,7 +151,8 @@ namespace FinanceTest
             Assert.AreEqual(false, b.Equals(null));
         }
 
-        public void GetHashCode()
+        [TestMethod]
+        public new void GetHashCode()
         {
             DateTime timestamp = new DateTime(2015, 1, 5, 10, 1, 0);
             double open = 54.03;
@@ -172,7 +173,7 @@ namespace FinanceTest
         }
 
         [TestMethod]
-        public void ToString()
+        public new void ToString()
         {
             DateTime timestamp = new DateTime(2015, 1, 5, 10, 1, 0);
             double open = 54.03;
