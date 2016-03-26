@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,6 +40,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.clearDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.candleStickChart1 = new GUIComponents.CandleStickChart();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -51,7 +53,7 @@
             this.dataToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(580, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(570, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -101,7 +103,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 345);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(580, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(570, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -128,11 +130,31 @@
             this.clearDataToolStripMenuItem.Text = "Clear data";
             this.clearDataToolStripMenuItem.Click += new System.EventHandler(this.clearDataToolStripMenuItem_Click);
             // 
+            // candleStickChart1
+            // 
+            this.candleStickChart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.candleStickChart1.Location = new System.Drawing.Point(0, 32);
+            this.candleStickChart1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.candleStickChart1.Name = "candleStickChart1";
+            this.candleStickChart1.ScrollGrace = 0D;
+            this.candleStickChart1.ScrollMaxX = 0D;
+            this.candleStickChart1.ScrollMaxY = 0D;
+            this.candleStickChart1.ScrollMaxY2 = 0D;
+            this.candleStickChart1.ScrollMinX = 0D;
+            this.candleStickChart1.ScrollMinY = 0D;
+            this.candleStickChart1.ScrollMinY2 = 0D;
+            this.candleStickChart1.Size = new System.Drawing.Size(567, 309);
+            this.candleStickChart1.TabIndex = 2;
+            this.candleStickChart1.UseExtendedPrintDialog = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(580, 367);
+            this.ClientSize = new System.Drawing.Size(570, 367);
+            this.Controls.Add(this.candleStickChart1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -160,6 +182,7 @@
         private System.Windows.Forms.ToolStripMenuItem openDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearDataToolStripMenuItem;
+        private GUIComponents.CandleStickChart candleStickChart1;
     }
 }
 

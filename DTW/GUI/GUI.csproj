@@ -44,6 +44,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="ZedGraph">
+      <HintPath>..\packages\ZedGraph.5.1.7\lib\net35-Client\ZedGraph.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainForm.cs">
@@ -87,6 +90,10 @@
     <ProjectReference Include="..\Finance\Finance.csproj">
       <Project>{fcf5afbe-5b89-48f0-b5e0-d15d7a25992b}</Project>
       <Name>Finance</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GUIComponenets\GUIComponents.csproj">
+      <Project>{EFDC92BA-9585-47D6-9208-83F131C9251D}</Project>
+      <Name>GUIComponents</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
