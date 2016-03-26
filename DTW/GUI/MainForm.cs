@@ -43,12 +43,12 @@ namespace GUI
             Application.Exit();
         }
 
-        private void saveDataToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void saveDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 toolStripStatusLabel1.Text = "Saving...";
-                ct.Save(new System.IO.StreamWriter(saveFileDialog1.FileName));
+                await ct.SaveAsync(new System.IO.StreamWriter(saveFileDialog1.FileName));
                 toolStripStatusLabel1.Text = "Saved " + saveFileDialog1.FileName;
             }
         }
