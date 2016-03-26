@@ -7,7 +7,17 @@ using System.Threading.Tasks;
 
 namespace Finance
 {
-    public class CandleTokenizer
+    public interface ICandleTokenizer
+    {
+        int GetLength();
+
+        Candle this[int index]
+        {
+            get;
+        }
+    }
+
+    public class CandleTokenizer : ICandleTokenizer
     {
         List<Candle> candles;
         public CandleTokenizer(System.IO.StreamReader sr)

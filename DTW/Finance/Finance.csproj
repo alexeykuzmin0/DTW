@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CandleTokenizer.cs" />
+    <Compile Include="DisjointMergeCandleTokenizer.cs" />
     <Compile Include="FinanceData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
