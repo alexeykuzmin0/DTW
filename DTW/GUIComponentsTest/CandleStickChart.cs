@@ -39,6 +39,8 @@ namespace GUIComponentsTest
             csc.SetCandles(tokenizer);
             Assert.AreEqual(1, csc.GraphPane.CurveList.Count);
             Assert.AreEqual(2, csc.GraphPane.CurveList[0].NPts);
+            Assert.AreEqual(0, csc.GraphPane.XAxis.Scale.Min);
+            Assert.AreEqual(1.2, csc.GraphPane.XAxis.Scale.Max);
         }
 
         [TestMethod]

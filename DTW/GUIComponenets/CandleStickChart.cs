@@ -38,6 +38,7 @@ namespace GUIComponents
                     0));
             }
             var curve = GraphPane.AddJapaneseCandleStick("", points);
+            AxisChange();
         }
     }
 }
