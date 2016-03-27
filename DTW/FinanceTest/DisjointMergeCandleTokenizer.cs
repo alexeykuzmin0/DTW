@@ -11,11 +11,17 @@ namespace FinanceTest
     public class DisjointMergeCandleTokenizer
     {
         const string SAMPLE1 =
-            "<DATE>;<TIME>;<OPEN>;<HIGH>;<LOW>;<CLOSE>;<VOL>\n" +
-            "20150105;100100;54.0300000;54.4000000;53.6100000;53.9900000;784480";
+            "<TICKER>;<PER>;<DATE>;<TIME>;<OPEN>;<HIGH>;<LOW>;<CLOSE>;<VOL>\n" +
+            "SBER;1;20150105;100100;54.0300000;54.4000000;53.6100000;53.9900000;784480";
         const string SAMPLE2 =
-            "<DATE>;<TIME>;<OPEN>;<HIGH>;<LOW>;<CLOSE>;<VOL>\n" +
-            "20150105;100200;53.9900000;54.0500000;53.7200000;53.7200000;287400";
+            "<TICKER>;<PER>;<DATE>;<TIME>;<OPEN>;<HIGH>;<LOW>;<CLOSE>;<VOL>\n" +
+            "SBER;1;20150105;100200;53.9900000;54.0500000;53.7200000;53.7200000;287400";
+        const string SAMPLE3 =
+            "<TICKER>;<PER>;<DATE>;<TIME>;<OPEN>;<HIGH>;<LOW>;<CLOSE>;<VOL>\n" +
+            "SBER;2;20150105;100200;53.9900000;54.0500000;53.7200000;53.7200000;287400";
+        const string SAMPLE4 =
+            "<TICKER>;<PER>;<DATE>;<TIME>;<OPEN>;<HIGH>;<LOW>;<CLOSE>;<VOL>\n" +
+            "SBPR;1;20150105;100200;53.9900000;54.0500000;53.7200000;53.7200000;287400";
 
         [TestMethod]
         public void Constructor()
@@ -24,6 +30,40 @@ namespace FinanceTest
                 new System.IO.StreamReader(CandleTokenizer.GenerateStream(SAMPLE1)));
             var ct2 = new Finance.CandleTokenizer(
                 new System.IO.StreamReader(CandleTokenizer.GenerateStream(SAMPLE2)));
+            var ct = new Finance.DisjointMergeCandleTokenizer(ct1, ct2);
+        }
+
+        [TestMethod]
+        public void TickerAndPeriodOK()
+        {
+            var ct1 = new Finance.CandleTokenizer(
+                new System.IO.StreamReader(CandleTokenizer.GenerateStream(SAMPLE1)));
+            var ct2 = new Finance.CandleTokenizer(
+                new System.IO.StreamReader(CandleTokenizer.GenerateStream(SAMPLE2)));
+            var ct = new Finance.DisjointMergeCandleTokenizer(ct1, ct2);
+            Assert.AreEqual("SBER", ct.GetTicker());
+            Assert.AreEqual(TimeSpan.FromMinutes(1), ct.GetPeriod());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(System.FormatException))]
+        public void TickerIncorrect()
+        {
+            var ct1 = new Finance.CandleTokenizer(
+                new System.IO.StreamReader(CandleTokenizer.GenerateStream(SAMPLE1)));
+            var ct2 = new Finance.CandleTokenizer(
+                new System.IO.StreamReader(CandleTokenizer.GenerateStream(SAMPLE4)));
+            var ct = new Finance.DisjointMergeCandleTokenizer(ct1, ct2);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(System.FormatException))]
+        public void PeriodIncorrect()
+        {
+            var ct1 = new Finance.CandleTokenizer(
+                new System.IO.StreamReader(CandleTokenizer.GenerateStream(SAMPLE1)));
+            var ct2 = new Finance.CandleTokenizer(
+                new System.IO.StreamReader(CandleTokenizer.GenerateStream(SAMPLE3)));
             var ct = new Finance.DisjointMergeCandleTokenizer(ct1, ct2);
         }
 
