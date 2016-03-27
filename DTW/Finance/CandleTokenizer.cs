@@ -21,9 +21,11 @@ namespace Finance
 
         public void Save(StreamWriter streamWriter)
         {
-            streamWriter.WriteLine("<DATE>;<TIME>;<OPEN>;<HIGH>;<LOW>;<CLOSE>");
+            streamWriter.WriteLine("<TICKER>;<PER>;<DATE>;<TIME>;<OPEN>;<HIGH>;<LOW>;<CLOSE>");
             for (int i = 0; i < GetLength(); ++i)
             {
+                streamWriter.Write(GetTicker() + ";");
+                streamWriter.Write(GetPeriod().TotalMinutes.ToString() + ";");
                 streamWriter.WriteLine(this[i].ToString());
             }
             streamWriter.Flush();
