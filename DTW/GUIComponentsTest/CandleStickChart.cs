@@ -40,5 +40,13 @@ namespace GUIComponentsTest
             Assert.AreEqual(1, csc.GraphPane.CurveList.Count);
             Assert.AreEqual(2, csc.GraphPane.CurveList[0].NPts);
         }
+
+        [TestMethod]
+        public void SetCandlesNull()
+        {
+            var csc = new GUIComponents.CandleStickChart();
+            csc.SetCandles(null);
+            Assert.AreEqual(0, csc.GraphPane.CurveList.Count);
+        }
     }
 }
