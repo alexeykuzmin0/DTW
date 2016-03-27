@@ -17,9 +17,9 @@ namespace GUIComponentsTest
         }
 
         const string SAMPLE =
-            "<DATE>;<TIME>;<OPEN>;<HIGH>;<LOW>;<CLOSE>;<VOL>\n" +
-            "20150105;100100;54.0300000;54.4000000;53.6100000;53.9900000;784480\n" +
-            "20150105;100200;53.9900000;54.0500000;53.7200000;53.7200000;287400";
+            "<TICKER>;<PER>;<DATE>;<TIME>;<OPEN>;<HIGH>;<LOW>;<CLOSE>;<VOL>\n" +
+            "SBER;1;20150105;100100;54.0300000;54.4000000;53.6100000;53.9900000;784480\n" +
+            "SBER;1;20150105;100200;53.9900000;54.0500000;53.7200000;53.7200000;287400";
 
         [TestMethod]
         public void Constructor()
@@ -41,6 +41,7 @@ namespace GUIComponentsTest
             Assert.AreEqual(2, csc.GraphPane.CurveList[0].NPts);
             Assert.AreEqual(0, csc.GraphPane.XAxis.Scale.Min);
             Assert.AreEqual(1.2, csc.GraphPane.XAxis.Scale.Max);
+            Assert.AreEqual("SBER 1 minute", csc.GraphPane.Title.Text);
         }
 
         [TestMethod]
@@ -49,6 +50,7 @@ namespace GUIComponentsTest
             var csc = new GUIComponents.CandleStickChart();
             csc.SetCandles(null);
             Assert.AreEqual(0, csc.GraphPane.CurveList.Count);
+            Assert.AreEqual("No data loaded", csc.GraphPane.Title.Text);
         }
     }
 }
