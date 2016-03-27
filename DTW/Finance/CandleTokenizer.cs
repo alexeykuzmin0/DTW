@@ -9,6 +9,9 @@ namespace Finance
 {
     public abstract class AbstractCandleTokenizer
     {
+        protected string ticker;
+        protected TimeSpan period;
+
         public abstract int GetLength();
 
         public abstract Candle this[int index]
@@ -30,6 +33,16 @@ namespace Finance
         {
             return Task.Run(() => Save(sw));
         }
+
+        public string GetTicker()
+        {
+            return ticker;
+        }
+
+        public TimeSpan GetPeriod()
+        {
+            return period;
+        }
     }
 
     public class CandleTokenizer : AbstractCandleTokenizer
@@ -48,6 +61,14 @@ namespace Finance
             while (!sr.EndOfStream)
             {
                 string[] line = sr.ReadLine().Split(';');
+                if (ticker == null && ids.ContainsKey("<TICKER>"))
+                {
+                    ticker = line[ids["<TICKER>"]];
+                }
+                if (period == new TimeSpan() && ids.ContainsKey("<PER>"))
+                {
+                    period = TimeSpan.FromMinutes(Convert.ToInt32(line[ids["<PER>"]]));
+                }
                 candles.Add(new Candle(ids, line));
             }
             sr.Close();
