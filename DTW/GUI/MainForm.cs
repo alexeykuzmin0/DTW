@@ -35,6 +35,7 @@ namespace GUI
                     ct = new Finance.DisjointMergeCandleTokenizer(ct, ct2);
                 }
                 candleStickChart1.SetCandles(ct);
+                candleStickChart1.Invalidate();
                 toolStripStatusLabel1.Text = "Loaded " + openFileDialog1.FileName;
             }
         }
@@ -58,6 +59,7 @@ namespace GUI
         {
             ct = null;
             candleStickChart1.SetCandles(ct);
+            candleStickChart1.Invalidate();
         }
     }
 }
