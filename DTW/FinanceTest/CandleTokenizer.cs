@@ -36,7 +36,7 @@ namespace FinanceTest
             var ct2 = new Finance.CandleTokenizer(ct, TimeSpan.FromMinutes(5));
             var candle = new Finance.Candle(new DateTime(2015, 1, 5, 10, 0, 0), 54.03, 54.4, 53.61, 53.72);
             Assert.AreEqual(1, ct2.GetLength());
-            Assert.AreEqual(candle, ct[0]);
+            Assert.AreEqual(candle, ct2[0]);
             Assert.AreEqual("SBER", ct2.GetTicker());
             Assert.AreEqual(TimeSpan.FromMinutes(5), ct2.GetPeriod());
         }

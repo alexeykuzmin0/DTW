@@ -50,6 +50,7 @@ namespace Finance
     public class CandleTokenizer : AbstractCandleTokenizer
     {
         List<Candle> candles;
+
         public CandleTokenizer(System.IO.StreamReader sr)
         {
             string[] captions = sr.ReadLine().Split(';');
@@ -74,6 +75,43 @@ namespace Finance
                 candles.Add(new Candle(ids, line));
             }
             sr.Close();
+        }
+
+        public CandleTokenizer(AbstractCandleTokenizer ct, TimeSpan interval)
+        {
+            if (interval.Ticks % ct.GetPeriod().Ticks != 0)
+            {
+                throw new ArgumentException("New interval is not divided by old interval");
+            }
+            if (TimeSpan.FromDays(1).Ticks % interval.Ticks != 0)
+            {
+                throw new ArgumentException("24 hours are not divided by new interval");
+            }
+            period = interval;
+            ticker = ct.GetTicker();
+            candles = new List<Candle>();
+            if (ct.GetLength() == 0)
+            {
+                return;
+            }
+            DateTime prev = new DateTime(ct[0].timestamp.Ticks / interval.Ticks * interval.Ticks);
+            Candle candle = new Candle(prev, ct[0].open, ct[0].high, ct[0].low, ct[0].close);
+            for (int i = 0; i < ct.GetLength(); ++i)
+            {
+                DateTime cur = new DateTime(ct[i].timestamp.Ticks / interval.Ticks * interval.Ticks);
+                if (cur != prev)
+                {
+                    candles.Add(candle);
+                    candle = new Candle(cur, ct[i].open, ct[i].high, ct[i].low, ct[i].close);
+                }
+                else
+                {
+                    candle.close = ct[i].close;
+                    candle.high = Math.Max(candle.high, ct[i].high);
+                    candle.low = Math.Min(candle.low, ct[i].low);
+                }
+            }
+            candles.Add(candle);
         }
 
         public static Task<CandleTokenizer> CreateAsync(System.IO.StreamReader sr)
