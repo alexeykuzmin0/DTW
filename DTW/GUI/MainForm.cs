@@ -34,6 +34,7 @@ namespace GUI
                         new System.IO.StreamReader(openFileDialog1.FileName));
                     ct = new Finance.DisjointMergeCandleTokenizer(ct, ct2);
                 }
+                candleStickChart1.SetCandles(ct);
                 toolStripStatusLabel1.Text = "Loaded " + openFileDialog1.FileName;
             }
         }
@@ -56,6 +57,7 @@ namespace GUI
         private void clearDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ct = null;
+            candleStickChart1.SetCandles(ct);
         }
     }
 }
