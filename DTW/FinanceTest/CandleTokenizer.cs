@@ -17,15 +17,31 @@ namespace FinanceTest
         }
 
         const string SAMPLE =
-            "<DATE>;<TIME>;<OPEN>;<HIGH>;<LOW>;<CLOSE>;<VOL>\n" +
-            "20150105;100100;54.0300000;54.4000000;53.6100000;53.9900000;784480\n" +
-            "20150105;100200;53.9900000;54.0500000;53.7200000;53.7200000;287400";
+            "<TICKER>;<PER>;<DATE>;<TIME>;<OPEN>;<HIGH>;<LOW>;<CLOSE>;<VOL>\n" +
+            "SBER;1;20150105;100100;54.0300000;54.4000000;53.6100000;53.9900000;784480\n" +
+            "SBER;1;20150105;100200;53.9900000;54.0500000;53.7200000;53.7200000;287400";
 
         [TestMethod]
         public void Constructor()
         {
             Finance.CandleTokenizer ct = new Finance.CandleTokenizer(
                 new System.IO.StreamReader(GenerateStream(SAMPLE)));
+        }
+
+        [TestMethod]
+        public void GetTicker()
+        {
+            Finance.CandleTokenizer ct = new Finance.CandleTokenizer(
+                new System.IO.StreamReader(GenerateStream(SAMPLE)));
+            Assert.AreEqual("SBER", ct.GetTicker());
+        }
+
+        [TestMethod]
+        public void GetPeriod()
+        {
+            Finance.CandleTokenizer ct = new Finance.CandleTokenizer(
+                new System.IO.StreamReader(GenerateStream(SAMPLE)));
+            Assert.AreEqual(TimeSpan.FromMinutes(1), ct.GetPeriod());
         }
 
         [TestMethod]
