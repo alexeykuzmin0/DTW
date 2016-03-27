@@ -18,7 +18,7 @@ namespace GUIComponents
             GraphPane.YAxis.Title.Text = "";
         }
 
-        public void SetCandles(CandleTokenizer tokenizer)
+        public void SetCandles(AbstractCandleTokenizer tokenizer)
         {
             candles = tokenizer;
             var points = new ZedGraph.StockPointList();
