@@ -61,6 +61,12 @@
       <DependentUpon>CandleStickChart.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Finance\Finance.csproj">
+      <Project>{fcf5afbe-5b89-48f0-b5e0-d15d7a25992b}</Project>
+      <Name>Finance</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

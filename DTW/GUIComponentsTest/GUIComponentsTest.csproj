@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="ZedGraph, Version=5.1.7.430, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
       <HintPath>..\packages\ZedGraph.5.1.7\lib\net35-Client\ZedGraph.dll</HintPath>
       <Private>True</Private>
@@ -58,6 +59,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Finance\Finance.csproj">
+      <Project>{fcf5afbe-5b89-48f0-b5e0-d15d7a25992b}</Project>
+      <Name>Finance</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GUIComponenets\GUIComponents.csproj">
       <Project>{efdc92ba-9585-47d6-9208-83f131c9251d}</Project>
       <Name>GUIComponents</Name>
