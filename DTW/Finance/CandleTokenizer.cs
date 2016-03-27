@@ -103,6 +103,7 @@ namespace Finance
                 {
                     candles.Add(candle);
                     candle = new Candle(cur, ct[i].open, ct[i].high, ct[i].low, ct[i].close);
+                    prev = cur;
                 }
                 else
                 {

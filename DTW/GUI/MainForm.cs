@@ -61,5 +61,16 @@ namespace GUI
             candleStickChart1.SetCandles(ct);
             candleStickChart1.Invalidate();
         }
+
+        private void changePeriodToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var getPeriod = new GetInterval();
+            if (getPeriod.ShowDialog() == DialogResult.OK)
+            {
+                ct = new Finance.CandleTokenizer(ct, getPeriod.dateTimePicker1.Value.TimeOfDay);
+                candleStickChart1.SetCandles(ct);
+                candleStickChart1.Invalidate();
+            }
+        }
     }
 }
