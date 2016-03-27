@@ -20,7 +20,12 @@ namespace GUIComponents
 
         public void SetCandles(AbstractCandleTokenizer tokenizer)
         {
+            GraphPane.CurveList.Clear();
             candles = tokenizer;
+            if (tokenizer == null)
+            {
+                return;
+            }
             var points = new ZedGraph.StockPointList();
             for (int i = 0; i < candles.GetLength(); ++i)
             {
