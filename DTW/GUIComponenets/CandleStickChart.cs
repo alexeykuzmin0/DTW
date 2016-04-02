@@ -18,6 +18,10 @@ namespace GUIComponents
             GraphPane.YAxis.Title.Text = "";
             IsShowPointValues = true;
             PointValueEvent += CandleStickChart_PointValueEvent;
+            GraphPane.XAxis.MajorTic.IsAllTics = false;
+            GraphPane.XAxis.MinorTic.IsAllTics = false;
+            GraphPane.XAxis.Scale.IsVisible = false;
+            GraphPane.XAxis.Scale.MagAuto = false;
         }
 
         private string CandleStickChart_PointValueEvent(ZedGraph.ZedGraphControl sender, ZedGraph.GraphPane pane, ZedGraph.CurveItem curve, int iPt)
