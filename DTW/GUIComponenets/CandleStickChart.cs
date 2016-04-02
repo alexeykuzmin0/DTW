@@ -16,6 +16,17 @@ namespace GUIComponents
             GraphPane.Title.Text = "No data loaded";
             GraphPane.XAxis.Title.Text = "";
             GraphPane.YAxis.Title.Text = "";
+            IsShowPointValues = true;
+            PointValueEvent += CandleStickChart_PointValueEvent;
+        }
+
+        private string CandleStickChart_PointValueEvent(ZedGraph.ZedGraphControl sender, ZedGraph.GraphPane pane, ZedGraph.CurveItem curve, int iPt)
+        {
+            return candles[iPt].timestamp.ToString("dd.MM.yyyy HH:mm") + "\n" +
+                "Open:\t" + candles[iPt].open.ToString() + "\n" +
+                "High:\t" + candles[iPt].high.ToString() + "\n" +
+                "Low:\t" + candles[iPt].low.ToString() + "\n" +
+                "Close:\t" + candles[iPt].close.ToString();
         }
 
         private string CreatePeriodString(TimeSpan period)
