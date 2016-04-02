@@ -40,7 +40,27 @@ namespace GUIComponents
             DateTime maxTime = candles[maxId].timestamp;
 
             pane.XAxis.Scale.Mag = 0;
+            ChangeYScale(minTime, maxTime, pane);
             AddTicks(minTime, maxTime, pane);
+        }
+
+        private void ChangeYScale(DateTime minTime, DateTime maxTime, GraphPane pane)
+        {
+            double xmin = getX(minTime);
+            double xmax = getX(maxTime);
+            int from = (int)Math.Floor(xmin);
+            int to = (int)Math.Ceiling(xmax);
+
+            double ymin = double.PositiveInfinity;
+            double ymax = double.NegativeInfinity;
+            for (int i = from; i <= to; ++i)
+            {
+                Candle c = candles[i];
+                ymin = Math.Min(ymin, c.low);
+                ymax = Math.Max(ymax, c.high);
+            }
+            pane.YAxis.Scale.Min = ymin - (ymax - ymin) * 0.05;
+            pane.YAxis.Scale.Max = ymax + (ymax - ymin) * 0.05;
         }
 
         private void AddTicks(DateTime minTime, DateTime maxTime, ZedGraph.GraphPane pane)
@@ -227,7 +247,7 @@ namespace GUIComponents
 
         private void AddMonthTicks(DateTime minTime, DateTime maxTime, ZedGraph.GraphPane pane)
         {
-            var start = new DateTime(minTime.Year, minTime.Month + (minTime.Day > 15 ? 1 : 0), 15);
+            var start = new DateTime(minTime.Year, (minTime.Month + (minTime.Day > 15 ? 1 : 0) - 1) % 12 + 1, 15);
             for (var cur = start; cur < maxTime;
                 cur = new DateTime(cur.Year + cur.Month / 12, cur.Month % 12 + 1, 15))
             {
@@ -310,7 +330,7 @@ namespace GUIComponents
             {
                 return 0;
             }
-            if (cur > candles[candles.GetLength() - 1].timestamp)
+            if (cur >= candles[candles.GetLength() - 1].timestamp)
             {
                 return candles.GetLength() - 1;
             }
