@@ -30,6 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.candleStickChart1 = new GUIComponents.CandleStickChart();
+            this.button1 = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // candleStickChart1
@@ -55,11 +58,33 @@
             this.candleStickChart1.TabIndex = 0;
             this.candleStickChart1.UseExtendedPrintDialog = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(0, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Save";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "Finam csv|*.csv";
+            this.saveFileDialog1.Title = "Save data file";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Finam csv|*.csv";
+            this.openFileDialog1.Title = "Open data file";
+            // 
             // PatternForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(282, 253);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.candleStickChart1);
             this.Name = "PatternForm";
             this.Text = "Pattern to search";
@@ -70,5 +95,8 @@
         #endregion
 
         public GUIComponents.CandleStickChart candleStickChart1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

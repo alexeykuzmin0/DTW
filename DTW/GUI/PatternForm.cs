@@ -12,12 +12,24 @@ namespace GUI
 {
     public partial class PatternForm : Form
     {
-        public PatternForm()
+        Finance.AbstractCandleTokenizer candles;
+
+        public PatternForm(Finance.AbstractCandleTokenizer ct)
         {
             InitializeComponent();
+            candles = ct;
+            candleStickChart1.SetCandles(ct);
             candleStickChart1.GraphPane.Title.IsVisible = false;
             candleStickChart1.IsModifiable = true;
             candleStickChart1.IsShowHScrollBar = false;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                candles.Save(new System.IO.StreamWriter(saveFileDialog1.FileName));
+            }
         }
     }
 }

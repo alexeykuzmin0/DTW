@@ -75,9 +75,8 @@ namespace GUI
 
         private void candleStickChart1_CandlesSelected(ZedGraph.ZedGraphControl sender, int start, int end)
         {
-            var pf = new PatternForm();
             var pc = new Finance.PartialCandleTokenizer(ct, start, end - start);
-            pf.candleStickChart1.SetCandles(pc);
+            var pf = new PatternForm(pc);
             pf.ShowDialog();
         }
     }
