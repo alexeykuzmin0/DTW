@@ -540,7 +540,7 @@ namespace GUIComponents
         {
             if (CandlesSelected != null)
             {
-                CandlesSelected(this, begin, end);
+                CandlesSelected(this, Math.Min(begin, end), Math.Max(begin, end));
             }
         }
     }
