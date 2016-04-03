@@ -43,6 +43,7 @@
     <Compile Include="CandleTokenizer.cs" />
     <Compile Include="DisjointMergeCandleTokenizer.cs" />
     <Compile Include="FinanceData.cs" />
+    <Compile Include="PartialCandleTokenizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
