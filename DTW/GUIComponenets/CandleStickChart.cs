@@ -13,8 +13,6 @@ namespace GUIComponents
         Finance.AbstractCandleTokenizer candles;
         bool scaling = false;
         double initialX = 0.0;
-        double initialMin = 0.0;
-        double initialMax = 0.0;
 
         public CandleStickChart()
         {
@@ -27,14 +25,47 @@ namespace GUIComponents
             GraphPane.XAxis.MinorTic.IsAllTics = false;
             GraphPane.XAxis.Scale.IsVisible = false;
             GraphPane.XAxis.Scale.MagAuto = false;
+            GraphPane.XAxis.Scale.MaxAuto = false;
             GraphPane.XAxis.Scale.Mag = 0;
             GraphPane.AxisChangeEvent += GraphPane_AxisChangeEvent;
             IsEnableWheelZoom = false;
             MouseDownEvent += CandleStickChart_MouseDownEvent;
             MouseUpEvent += CandleStickChart_MouseUpEvent;
             MouseMoveEvent += CandleStickChart_MouseMoveEvent;
+            IsShowHScrollBar = true;
+            IsAutoScrollRange = true;
+            ScrollProgressEvent += CandleStickChart_ScrollProgressEvent;
+            ScrollDoneEvent += CandleStickChart_ScrollDoneEvent;
         }
-        
+
+        private void CandleStickChart_ScrollDoneEvent(ZedGraphControl sender, System.Windows.Forms.ScrollBar scrollBar, ZoomState oldState, ZoomState newState)
+        {
+            int minId = (int)Math.Ceiling(sender.GraphPane.XAxis.Scale.Min);
+            minId = Math.Max(0, Math.Min(candles.GetLength() - 1, minId));
+            int maxId = (int)Math.Floor(sender.GraphPane.XAxis.Scale.Max);
+            maxId = Math.Max(0, Math.Min(candles.GetLength() - 1, maxId));
+
+            DateTime minTime = candles[minId].timestamp;
+            DateTime maxTime = candles[maxId].timestamp;
+
+            ChangeYScale(minTime, maxTime, sender.GraphPane);
+            sender.AxisChange();
+        }
+
+        private void CandleStickChart_ScrollProgressEvent(ZedGraphControl sender, System.Windows.Forms.ScrollBar scrollBar, ZoomState oldState, ZoomState newState)
+        {
+            int minId = (int)Math.Ceiling(sender.GraphPane.XAxis.Scale.Min);
+            minId = Math.Max(0, Math.Min(candles.GetLength() - 1, minId));
+            int maxId = (int)Math.Floor(sender.GraphPane.XAxis.Scale.Max);
+            maxId = Math.Max(0, Math.Min(candles.GetLength() - 1, maxId));
+
+            DateTime minTime = candles[minId].timestamp;
+            DateTime maxTime = candles[maxId].timestamp;
+
+            ChangeYScale(minTime, maxTime, sender.GraphPane);
+            sender.AxisChange();
+        }
+
         private bool CandleStickChart_MouseMoveEvent(ZedGraphControl sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (scaling)
@@ -43,10 +74,19 @@ namespace GUIComponents
                 sender.GraphPane.ReverseTransform(e.Location, out x, out y);
                 var scale = sender.GraphPane.XAxis.Scale;
                 scale.Min = scale.Max - (scale.Max - scale.Min) / (scale.Max - x) * (scale.Max - initialX);
-                AxisChange();
                 Invalidate();
+                int minId = (int)Math.Ceiling(sender.GraphPane.XAxis.Scale.Min);
+                minId = Math.Max(0, Math.Min(candles.GetLength() - 1, minId));
+                int maxId = (int)Math.Floor(sender.GraphPane.XAxis.Scale.Max);
+                maxId = Math.Max(0, Math.Min(candles.GetLength() - 1, maxId));
+
+                DateTime minTime = candles[minId].timestamp;
+                DateTime maxTime = candles[maxId].timestamp;
+
+                ChangeYScale(minTime, maxTime, sender.GraphPane);
+                sender.AxisChange();
             }
-            return true;
+            return false;
         }
 
         private bool CandleStickChart_MouseUpEvent(ZedGraphControl sender, System.Windows.Forms.MouseEventArgs e)
@@ -63,8 +103,6 @@ namespace GUIComponents
             {
                 scaling = true;
                 initialX = x;
-                initialMin = sender.GraphPane.XAxis.Scale.Min;
-                initialMax = sender.GraphPane.XAxis.Scale.Max;
             }
             return true;
         }
@@ -82,7 +120,6 @@ namespace GUIComponents
             DateTime maxTime = candles[maxId].timestamp;
 
             pane.XAxis.Scale.Mag = 0;
-            ChangeYScale(minTime, maxTime, pane);
             AddTicks(minTime, maxTime, pane);
         }
 
