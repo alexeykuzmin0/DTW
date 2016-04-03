@@ -583,7 +583,7 @@ namespace GUIComponents
                     0));
             }
             var curve = GraphPane.AddJapaneseCandleStick("", points);
-            GraphPane.XAxis.Scale.Min = 0;
+            GraphPane.XAxis.Scale.Min = -0.75;
             GraphPane.XAxis.Scale.Max = candles.GetLength();
             int minId = (int)Math.Ceiling(GraphPane.XAxis.Scale.Min);
             minId = Math.Max(0, Math.Min(candles.GetLength() - 1, minId));

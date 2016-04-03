@@ -17,6 +17,7 @@ namespace GUI
             InitializeComponent();
             candleStickChart1.GraphPane.Title.IsVisible = false;
             candleStickChart1.IsModifiable = true;
+            candleStickChart1.IsShowHScrollBar = false;
         }
     }
 }
