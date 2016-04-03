@@ -17,6 +17,11 @@ namespace GUIComponents
         bool selecting = false;
         ZedGraph.LineObj[] selectingSegments;
 
+        public bool IsModifiable = false;
+        bool modifying = false;
+        int modifyingId = 0;
+        Finance.Candle.Fields modifyingField;
+
         public delegate void CandlesSelectedHandler(ZedGraphControl sender, int start, int end);
         public event CandlesSelectedHandler CandlesSelected;
 
@@ -106,6 +111,32 @@ namespace GUIComponents
                     new System.Drawing.RectangleF((float)x, (float)Math.Min(initialY, y), 0, (float)Math.Abs(y - initialY));
                 sender.Invalidate();
             }
+            if (modifying)
+            {
+                double x, y;
+                sender.GraphPane.ReverseTransform(e.Location, out x, out y);
+                if (modifyingField == Candle.Fields.OPEN)
+                {
+                    candles[modifyingId].open = y;
+                    (sender.GraphPane.CurveList[0].Points[modifyingId] as ZedGraph.StockPt).Open = y;
+                }
+                else if (modifyingField == Candle.Fields.HIGH)
+                {
+                    candles[modifyingId].high = y;
+                    (sender.GraphPane.CurveList[0].Points[modifyingId] as ZedGraph.StockPt).High = y;
+                }
+                else if (modifyingField == Candle.Fields.LOW)
+                {
+                    candles[modifyingId].low = y;
+                    (sender.GraphPane.CurveList[0].Points[modifyingId] as ZedGraph.StockPt).Low = y;
+                }
+                else
+                {
+                    candles[modifyingId].close = y;
+                    (sender.GraphPane.CurveList[0].Points[modifyingId] as ZedGraph.StockPt).Close = y;
+                }
+                sender.Invalidate();
+            }
             return false;
         }
 
@@ -125,6 +156,7 @@ namespace GUIComponents
                 sender.Invalidate();
             }
             selecting = false;
+            modifying = false;
             return true;
         }
 
@@ -136,6 +168,34 @@ namespace GUIComponents
             {
                 scaling = true;
                 initialX = x;
+            }
+            else if (IsModifiable)
+            {
+                modifying = true;
+                modifyingId = (int)(x + 0.5);
+                Finance.Candle c = candles[modifyingId];
+                if (Math.Abs(y - c.open) <= Math.Abs(y - c.high) &&
+                    Math.Abs(y - c.open) <= Math.Abs(y - c.low) &&
+                    Math.Abs(y - c.open) <= Math.Abs(y - c.close))
+                {
+                    modifyingField = Candle.Fields.OPEN;
+                }
+                else if (Math.Abs(y - c.high) <= Math.Abs(y - c.open) &&
+                          Math.Abs(y - c.high) <= Math.Abs(y - c.low) &&
+                          Math.Abs(y - c.high) <= Math.Abs(y - c.close))
+                {
+                    modifyingField = Candle.Fields.HIGH;
+                }
+                else if (Math.Abs(y - c.low) <= Math.Abs(y - c.high) &&
+                          Math.Abs(y - c.low) <= Math.Abs(y - c.open) &&
+                          Math.Abs(y - c.low) <= Math.Abs(y - c.close))
+                {
+                    modifyingField = Candle.Fields.LOW;
+                }
+                else
+                {
+                    modifyingField = Candle.Fields.CLOSE;
+                }
             }
             else
             {

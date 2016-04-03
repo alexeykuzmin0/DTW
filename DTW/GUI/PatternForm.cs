@@ -15,6 +15,8 @@ namespace GUI
         public PatternForm()
         {
             InitializeComponent();
+            candleStickChart1.GraphPane.Title.IsVisible = false;
+            candleStickChart1.IsModifiable = true;
         }
     }
 }
