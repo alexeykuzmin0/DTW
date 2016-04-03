@@ -35,14 +35,14 @@
             this.dataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changePeriodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.clearDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.candleStickChart1 = new GUIComponents.CandleStickChart();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changePeriodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -88,16 +88,38 @@
             // openDataToolStripMenuItem
             // 
             this.openDataToolStripMenuItem.Name = "openDataToolStripMenuItem";
-            this.openDataToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.openDataToolStripMenuItem.Size = new System.Drawing.Size(154, 26);
             this.openDataToolStripMenuItem.Text = "&Open data";
             this.openDataToolStripMenuItem.Click += new System.EventHandler(this.openDataToolStripMenuItem_Click);
             // 
             // saveDataToolStripMenuItem
             // 
             this.saveDataToolStripMenuItem.Name = "saveDataToolStripMenuItem";
-            this.saveDataToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.saveDataToolStripMenuItem.Size = new System.Drawing.Size(154, 26);
             this.saveDataToolStripMenuItem.Text = "&Save data";
             this.saveDataToolStripMenuItem.Click += new System.EventHandler(this.saveDataToolStripMenuItem_Click);
+            // 
+            // clearDataToolStripMenuItem
+            // 
+            this.clearDataToolStripMenuItem.Name = "clearDataToolStripMenuItem";
+            this.clearDataToolStripMenuItem.Size = new System.Drawing.Size(154, 26);
+            this.clearDataToolStripMenuItem.Text = "Clear data";
+            this.clearDataToolStripMenuItem.Click += new System.EventHandler(this.clearDataToolStripMenuItem_Click);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.changePeriodToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(47, 24);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // changePeriodToolStripMenuItem
+            // 
+            this.changePeriodToolStripMenuItem.Name = "changePeriodToolStripMenuItem";
+            this.changePeriodToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
+            this.changePeriodToolStripMenuItem.Text = "Change period";
+            this.changePeriodToolStripMenuItem.Click += new System.EventHandler(this.changePeriodToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -126,18 +148,15 @@
             this.saveFileDialog1.Filter = "Finam csv|*.csv";
             this.saveFileDialog1.Title = "Save data file";
             // 
-            // clearDataToolStripMenuItem
-            // 
-            this.clearDataToolStripMenuItem.Name = "clearDataToolStripMenuItem";
-            this.clearDataToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.clearDataToolStripMenuItem.Text = "Clear data";
-            this.clearDataToolStripMenuItem.Click += new System.EventHandler(this.clearDataToolStripMenuItem_Click);
-            // 
             // candleStickChart1
             // 
             this.candleStickChart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.candleStickChart1.IsAutoScrollRange = true;
+            this.candleStickChart1.IsEnableWheelZoom = false;
+            this.candleStickChart1.IsShowHScrollBar = true;
+            this.candleStickChart1.IsShowPointValues = true;
             this.candleStickChart1.Location = new System.Drawing.Point(0, 32);
             this.candleStickChart1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.candleStickChart1.Name = "candleStickChart1";
@@ -151,21 +170,7 @@
             this.candleStickChart1.Size = new System.Drawing.Size(567, 309);
             this.candleStickChart1.TabIndex = 2;
             this.candleStickChart1.UseExtendedPrintDialog = true;
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.changePeriodToolStripMenuItem});
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(47, 24);
-            this.editToolStripMenuItem.Text = "Edit";
-            // 
-            // changePeriodToolStripMenuItem
-            // 
-            this.changePeriodToolStripMenuItem.Name = "changePeriodToolStripMenuItem";
-            this.changePeriodToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
-            this.changePeriodToolStripMenuItem.Text = "Change period";
-            this.changePeriodToolStripMenuItem.Click += new System.EventHandler(this.changePeriodToolStripMenuItem_Click);
+            this.candleStickChart1.CandlesSelected += new GUIComponents.CandleStickChart.CandlesSelectedHandler(this.candleStickChart1_CandlesSelected);
             // 
             // MainForm
             // 
