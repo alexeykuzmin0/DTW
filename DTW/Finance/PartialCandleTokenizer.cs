@@ -17,6 +17,8 @@ namespace Finance
             this.ct = ct;
             this.start = start;
             this.length = length;
+            ticker = ct.GetTicker();
+            period = ct.GetPeriod();
         }
 
         public override Candle this[int index]
