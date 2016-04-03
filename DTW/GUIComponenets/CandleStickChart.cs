@@ -17,6 +17,9 @@ namespace GUIComponents
         bool selecting = false;
         ZedGraph.LineObj[] selectingSegments;
 
+        public delegate void CandlesSelectedHandler(ZedGraphControl sender, int start, int end);
+        public event CandlesSelectedHandler CandlesSelected;
+
         public CandleStickChart()
         {
             GraphPane.Title.Text = "No data loaded";
@@ -111,6 +114,9 @@ namespace GUIComponents
             scaling = false;
             if (selecting)
             {
+                double x, y;
+                sender.GraphPane.ReverseTransform(e.Location, out x, out y);
+                OnCandlesSelected((int)initialX + 1, (int)x + 1);
                 for (int i = 0; i < 4; ++i)
                 {
                     sender.GraphPane.GraphObjList.Remove(selectingSegments[i]);
@@ -528,6 +534,14 @@ namespace GUIComponents
             DateTime maxTime = candles[maxId].timestamp;
             ChangeYScale(minTime, maxTime, GraphPane);
             AxisChange();
+        }
+
+        private void OnCandlesSelected(int begin, int end)
+        {
+            if (CandlesSelected != null)
+            {
+                CandlesSelected(this, begin, end);
+            }
         }
     }
 }
