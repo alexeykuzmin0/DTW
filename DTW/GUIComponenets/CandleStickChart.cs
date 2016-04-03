@@ -11,6 +11,10 @@ namespace GUIComponents
     public class CandleStickChart : ZedGraph.ZedGraphControl
     {
         Finance.AbstractCandleTokenizer candles;
+        bool scaling = false;
+        double initialX = 0.0;
+        double initialMin = 0.0;
+        double initialMax = 0.0;
 
         public CandleStickChart()
         {
@@ -25,6 +29,44 @@ namespace GUIComponents
             GraphPane.XAxis.Scale.MagAuto = false;
             GraphPane.XAxis.Scale.Mag = 0;
             GraphPane.AxisChangeEvent += GraphPane_AxisChangeEvent;
+            IsEnableWheelZoom = false;
+            MouseDownEvent += CandleStickChart_MouseDownEvent;
+            MouseUpEvent += CandleStickChart_MouseUpEvent;
+            MouseMoveEvent += CandleStickChart_MouseMoveEvent;
+        }
+        
+        private bool CandleStickChart_MouseMoveEvent(ZedGraphControl sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (scaling)
+            {
+                double x, y;
+                sender.GraphPane.ReverseTransform(e.Location, out x, out y);
+                var scale = sender.GraphPane.XAxis.Scale;
+                scale.Min = scale.Max - (scale.Max - scale.Min) / (scale.Max - x) * (scale.Max - initialX);
+                AxisChange();
+                Invalidate();
+            }
+            return true;
+        }
+
+        private bool CandleStickChart_MouseUpEvent(ZedGraphControl sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            scaling = false;
+            return true;
+        }
+
+        private bool CandleStickChart_MouseDownEvent(ZedGraphControl sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            double x, y;
+            sender.GraphPane.ReverseTransform(e.Location, out x, out y);
+            if (y < sender.GraphPane.YAxis.Scale.Min)
+            {
+                scaling = true;
+                initialX = x;
+                initialMin = sender.GraphPane.XAxis.Scale.Min;
+                initialMax = sender.GraphPane.XAxis.Scale.Max;
+            }
+            return true;
         }
 
         private void GraphPane_AxisChangeEvent(ZedGraph.GraphPane pane)
