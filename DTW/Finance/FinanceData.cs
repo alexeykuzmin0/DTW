@@ -8,6 +8,14 @@ namespace Finance
 {
     public class Candle
     {
+        public enum Fields
+        {
+            OPEN,
+            HIGH,
+            LOW,
+            CLOSE
+        }
+
         public DateTime timestamp;
         public double open, high, low, close;
 
