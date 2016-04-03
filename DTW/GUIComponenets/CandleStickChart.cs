@@ -476,6 +476,16 @@ namespace GUIComponents
                     0));
             }
             var curve = GraphPane.AddJapaneseCandleStick("", points);
+            GraphPane.XAxis.Scale.Min = 0;
+            GraphPane.XAxis.Scale.Max = candles.GetLength();
+            int minId = (int)Math.Ceiling(GraphPane.XAxis.Scale.Min);
+            minId = Math.Max(0, Math.Min(candles.GetLength() - 1, minId));
+            int maxId = (int)Math.Floor(GraphPane.XAxis.Scale.Max);
+            maxId = Math.Max(0, Math.Min(candles.GetLength() - 1, maxId));
+
+            DateTime minTime = candles[minId].timestamp;
+            DateTime maxTime = candles[maxId].timestamp;
+            ChangeYScale(minTime, maxTime, GraphPane);
             AxisChange();
         }
     }
