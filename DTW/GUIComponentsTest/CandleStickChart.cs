@@ -40,7 +40,7 @@ namespace GUIComponentsTest
             Assert.AreEqual(1, csc.GraphPane.CurveList.Count);
             Assert.AreEqual(2, csc.GraphPane.CurveList[0].NPts);
             Assert.AreEqual(0, csc.GraphPane.XAxis.Scale.Min);
-            Assert.AreEqual(1.2, csc.GraphPane.XAxis.Scale.Max);
+            Assert.AreEqual(2, csc.GraphPane.XAxis.Scale.Max);
             Assert.AreEqual("SBER 1 minute", csc.GraphPane.Title.Text);
         }
 
