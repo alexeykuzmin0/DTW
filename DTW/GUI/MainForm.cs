@@ -79,5 +79,11 @@ namespace GUI
             var pf = new PatternForm(pc);
             pf.ShowDialog();
         }
+
+        private void openPatternWindowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var pf = new PatternForm(null);
+            pf.ShowDialog();
+        }
     }
 }

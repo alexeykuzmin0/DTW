@@ -31,5 +31,15 @@ namespace GUI
                 candles.Save(new System.IO.StreamWriter(saveFileDialog1.FileName));
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                candles = new Finance.CandleTokenizer(new System.IO.StreamReader(openFileDialog1.FileName));
+                candleStickChart1.SetCandles(candles);
+                candleStickChart1.Invalidate();
+            }
+        }
     }
 }
