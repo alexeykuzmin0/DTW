@@ -13,6 +13,9 @@ namespace GUIComponents
         Finance.AbstractCandleTokenizer candles;
         bool scaling = false;
         double initialX = 0.0;
+        double initialY = 0.0;
+        bool selecting = false;
+        ZedGraph.LineObj[] selectingSegments;
 
         public CandleStickChart()
         {
@@ -86,12 +89,36 @@ namespace GUIComponents
                 ChangeYScale(minTime, maxTime, sender.GraphPane);
                 sender.AxisChange();
             }
+            if (selecting)
+            {
+                double x, y;
+                sender.GraphPane.ReverseTransform(e.Location, out x, out y);
+                selectingSegments[0].Location.Rect =
+                    new System.Drawing.RectangleF((float)Math.Min(initialX, x), (float)initialY, (float)Math.Abs(x - initialX), 0);
+                selectingSegments[1].Location.Rect =
+                    new System.Drawing.RectangleF((float)Math.Min(initialX, x), (float)y, (float)Math.Abs(x - initialX), 0);
+                selectingSegments[2].Location.Rect =
+                    new System.Drawing.RectangleF((float)initialX, (float)Math.Min(initialY, y), 0, (float)Math.Abs(y - initialY));
+                selectingSegments[3].Location.Rect =
+                    new System.Drawing.RectangleF((float)x, (float)Math.Min(initialY, y), 0, (float)Math.Abs(y - initialY));
+                sender.Invalidate();
+            }
             return false;
         }
 
         private bool CandleStickChart_MouseUpEvent(ZedGraphControl sender, System.Windows.Forms.MouseEventArgs e)
         {
             scaling = false;
+            if (selecting)
+            {
+                for (int i = 0; i < 4; ++i)
+                {
+                    sender.GraphPane.GraphObjList.Remove(selectingSegments[i]);
+                    selectingSegments[i] = null;
+                }
+                sender.Invalidate();
+            }
+            selecting = false;
             return true;
         }
 
@@ -104,6 +131,20 @@ namespace GUIComponents
                 scaling = true;
                 initialX = x;
             }
+            else
+            {
+                initialX = x;
+                initialY = y;
+                selecting = true;
+                selectingSegments = new LineObj[4];
+                for (int i = 0; i < 4; ++i)
+                {
+                    selectingSegments[i] = new LineObj(System.Drawing.Color.Black, x, y, x, y);
+                    selectingSegments[i].Line.Style = System.Drawing.Drawing2D.DashStyle.Dash;
+                    sender.GraphPane.GraphObjList.Add(selectingSegments[i]);
+                }
+            }
+            sender.Invalidate();
             return true;
         }
 
