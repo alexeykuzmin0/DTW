@@ -41,5 +41,10 @@ namespace GUI
                 candleStickChart1.Invalidate();
             }
         }
+
+        public Finance.AbstractCandleTokenizer GetCandles()
+        {
+            return candles;
+        }
     }
 }
