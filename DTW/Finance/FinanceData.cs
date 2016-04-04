@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Finance
 {
-    public class Candle
+    public class Candle : Core.IDistansable
     {
         public enum Fields
         {
@@ -118,6 +118,13 @@ namespace Finance
                 high.ToString(provider) + ";" +
                 low.ToString(provider) + ";" +
                 close.ToString(provider);
+        }
+
+        public double DistanceTo(Core.IDistansable rhs)
+        {
+            Candle rhs2 = (Candle)rhs;
+            return Math.Abs(open - rhs2.open) + Math.Abs(close - rhs2.close) +
+                Math.Abs(high - rhs2.high) + Math.Abs(low - rhs2.low);
         }
     }
 }
