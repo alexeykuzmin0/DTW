@@ -95,7 +95,13 @@ namespace GUI
 
         private void Match(AbstractCandleTokenizer candles, AbstractCandleTokenizer pattern)
         {
-            throw new NotImplementedException();
+            var dtw = new Core.DTW<Candle>(pattern);
+            List<Tuple<int, double>> results = new List<Tuple<int, double>>();
+            for (int i = 0; i < candles.GetLength(); ++i)
+            {
+                dtw.Process(candles[i]);
+                results.Add(new Tuple<int, double>(i, dtw.GetResult()));
+            }
         }
     }
 }
