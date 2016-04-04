@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Finance
 {
-    public abstract class AbstractCandleTokenizer
+    public abstract class AbstractCandleTokenizer : IEnumerable<Candle>
     {
         protected string ticker;
         protected TimeSpan period;
@@ -44,6 +45,59 @@ namespace Finance
         public TimeSpan GetPeriod()
         {
             return period;
+        }
+
+        public IEnumerator<Candle> GetEnumerator()
+        {
+            return new Enumerator(this);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        class Enumerator : IEnumerator<Candle>
+        {
+            int index;
+            AbstractCandleTokenizer candles;
+
+            public Enumerator(AbstractCandleTokenizer candles)
+            {
+                index = 0;
+                this.candles = candles;
+            }
+
+            public Candle Current
+            {
+                get
+                {
+                    return candles[index];
+                }
+            }
+
+            object IEnumerator.Current
+            {
+                get
+                {
+                    return Current;
+                }
+            }
+
+            public void Dispose()
+            {
+            }
+
+            public bool MoveNext()
+            {
+                ++index;
+                return index < candles.GetLength();
+            }
+
+            public void Reset()
+            {
+                index = 0;
+            }
         }
     }
 
