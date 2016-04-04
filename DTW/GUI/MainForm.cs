@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Finance;
 
 namespace GUI
 {
@@ -77,13 +78,24 @@ namespace GUI
         {
             var pc = new Finance.PartialCandleTokenizer(ct, start, end - start);
             var pf = new PatternForm(pc);
-            pf.ShowDialog();
+            if (pf.ShowDialog() == DialogResult.OK)
+            {
+                Match(ct, pf.GetCandles());
+            }
         }
 
         private void openPatternWindowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var pf = new PatternForm(null);
-            pf.ShowDialog();
+            if (pf.ShowDialog() == DialogResult.OK)
+            {
+                Match(ct, pf.GetCandles());
+            }
+        }
+
+        private void Match(AbstractCandleTokenizer candles, AbstractCandleTokenizer pattern)
+        {
+            throw new NotImplementedException();
         }
     }
 }
