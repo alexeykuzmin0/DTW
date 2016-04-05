@@ -109,7 +109,7 @@ namespace GUI
                     return lhs.Item2.CompareTo(rhs.Item2);
                 });
                 int end = results[0].Item1;
-                int start = end - pattern.GetLength();
+                int start = Math.Max(0, end - pattern.GetLength());
                 listBox1.Items.Add(
                     "Start: " + candles[start].timestamp.ToString("dd.MM.yyyy HH:mm") +
                     "\tEnd: " + candles[end].timestamp.ToString("dd.MM.yyyy HH:mm") +
