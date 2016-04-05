@@ -102,6 +102,23 @@ namespace GUI
                 dtw.Process(candles[i]);
                 results.Add(new Tuple<int, double>(i, dtw.GetResult()));
             }
+            for (int i = 0; i < 20; ++i)
+            {
+                results.Sort((Tuple<int, double> lhs, Tuple<int, double> rhs) =>
+                {
+                    return lhs.Item2.CompareTo(rhs.Item2);
+                });
+                int end = results[0].Item1;
+                int start = end - pattern.GetLength();
+                listBox1.Items.Add(
+                    "Start: " + candles[start].timestamp.ToString("dd.MM.yyyy HH:mm") +
+                    "\tEnd: " + candles[end].timestamp.ToString("dd.MM.yyyy HH:mm") +
+                    "\tDistance: " + results[0].Item2.ToString());
+                results.RemoveAll((Tuple<int, double> item) =>
+                {
+                    return item.Item1 >= start && item.Item1 <= end + pattern.GetLength();
+                });
+            }
         }
     }
 }

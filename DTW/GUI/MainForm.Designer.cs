@@ -42,9 +42,10 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.candleStickChart1 = new GUIComponents.CandleStickChart();
             this.matchingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openPatternWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.candleStickChart1 = new GUIComponents.CandleStickChart();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -59,7 +60,7 @@
             this.matchingToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(570, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(994, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -131,7 +132,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 345);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(570, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(994, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -150,6 +151,21 @@
             // 
             this.saveFileDialog1.Filter = "Finam csv|*.csv";
             this.saveFileDialog1.Title = "Save data file";
+            // 
+            // matchingToolStripMenuItem
+            // 
+            this.matchingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openPatternWindowToolStripMenuItem});
+            this.matchingToolStripMenuItem.Name = "matchingToolStripMenuItem";
+            this.matchingToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
+            this.matchingToolStripMenuItem.Text = "Matching";
+            // 
+            // openPatternWindowToolStripMenuItem
+            // 
+            this.openPatternWindowToolStripMenuItem.Name = "openPatternWindowToolStripMenuItem";
+            this.openPatternWindowToolStripMenuItem.Size = new System.Drawing.Size(228, 26);
+            this.openPatternWindowToolStripMenuItem.Text = "Open pattern window";
+            this.openPatternWindowToolStripMenuItem.Click += new System.EventHandler(this.openPatternWindowToolStripMenuItem_Click);
             // 
             // candleStickChart1
             // 
@@ -170,31 +186,28 @@
             this.candleStickChart1.ScrollMinX = 0D;
             this.candleStickChart1.ScrollMinY = 0D;
             this.candleStickChart1.ScrollMinY2 = 0D;
-            this.candleStickChart1.Size = new System.Drawing.Size(567, 309);
+            this.candleStickChart1.Size = new System.Drawing.Size(484, 309);
             this.candleStickChart1.TabIndex = 2;
             this.candleStickChart1.UseExtendedPrintDialog = true;
             this.candleStickChart1.CandlesSelected += new GUIComponents.CandleStickChart.CandlesSelectedHandler(this.candleStickChart1_CandlesSelected);
             // 
-            // matchingToolStripMenuItem
+            // listBox1
             // 
-            this.matchingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openPatternWindowToolStripMenuItem});
-            this.matchingToolStripMenuItem.Name = "matchingToolStripMenuItem";
-            this.matchingToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
-            this.matchingToolStripMenuItem.Text = "Matching";
-            // 
-            // openPatternWindowToolStripMenuItem
-            // 
-            this.openPatternWindowToolStripMenuItem.Name = "openPatternWindowToolStripMenuItem";
-            this.openPatternWindowToolStripMenuItem.Size = new System.Drawing.Size(228, 26);
-            this.openPatternWindowToolStripMenuItem.Text = "Open pattern window";
-            this.openPatternWindowToolStripMenuItem.Click += new System.EventHandler(this.openPatternWindowToolStripMenuItem_Click);
+            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 16;
+            this.listBox1.Location = new System.Drawing.Point(491, 32);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(503, 292);
+            this.listBox1.TabIndex = 3;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(570, 367);
+            this.ClientSize = new System.Drawing.Size(994, 367);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.candleStickChart1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -228,6 +241,7 @@
         private System.Windows.Forms.ToolStripMenuItem changePeriodToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem matchingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openPatternWindowToolStripMenuItem;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 
