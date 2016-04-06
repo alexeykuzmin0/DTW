@@ -230,6 +230,19 @@ namespace GUIComponents
             AddTicks(minTime, maxTime, pane);
         }
 
+        public void ChangeYScale()
+        {
+            int minId = (int)Math.Ceiling(GraphPane.XAxis.Scale.Min);
+            minId = Math.Max(0, Math.Min(candles.GetLength() - 1, minId));
+            int maxId = (int)Math.Floor(GraphPane.XAxis.Scale.Max);
+            maxId = Math.Max(0, Math.Min(candles.GetLength() - 1, maxId));
+
+            DateTime minTime = candles[minId].timestamp;
+            DateTime maxTime = candles[maxId].timestamp;
+
+            ChangeYScale(minTime, maxTime, GraphPane);
+        }
+
         private void ChangeYScale(DateTime minTime, DateTime maxTime, GraphPane pane)
         {
             double xmin = getX(minTime);
