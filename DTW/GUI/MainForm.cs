@@ -14,6 +14,8 @@ namespace GUI
     public partial class MainForm : Form
     {
         Finance.AbstractCandleTokenizer ct;
+        List<Tuple<int, int, double>> results;
+
         public MainForm()
         {
             InitializeComponent();
@@ -102,6 +104,7 @@ namespace GUI
                 dtw.Process(candles[i]);
                 results.Add(new Tuple<int, double>(i, dtw.GetResult()));
             }
+            this.results = new List<Tuple<int, int, double>>();
             for (int i = 0; i < 20; ++i)
             {
                 results.Sort((Tuple<int, double> lhs, Tuple<int, double> rhs) =>
@@ -110,6 +113,7 @@ namespace GUI
                 });
                 int end = results[0].Item1;
                 int start = Math.Max(0, end - pattern.GetLength());
+                this.results.Add(new Tuple<int, int, double>(start, end, results[0].Item2));
                 listBox1.Items.Add(
                     "Start: " + candles[start].timestamp.ToString("dd.MM.yyyy HH:mm") +
                     "\tEnd: " + candles[end].timestamp.ToString("dd.MM.yyyy HH:mm") +
