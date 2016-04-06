@@ -140,6 +140,21 @@ namespace GUIComponents
             return false;
         }
 
+        public void SelectCandles(int start, int end)
+        {
+            double max = double.NegativeInfinity;
+            double min = double.PositiveInfinity;
+            for (int i = start; i <= end; ++i)
+            {
+                max = Math.Max(max, candles[i].high);
+                min = Math.Min(min, candles[i].low);
+            }
+            GraphPane.GraphObjList.Add(new ZedGraph.LineObj(start - 0.5, min, start - 0.5, max));
+            GraphPane.GraphObjList.Add(new ZedGraph.LineObj(end + 0.5, min, end + 0.5, max));
+            GraphPane.GraphObjList.Add(new ZedGraph.LineObj(start - 0.5, min, end + 0.5, min));
+            GraphPane.GraphObjList.Add(new ZedGraph.LineObj(start - 0.5, max, end + 0.5, max));
+        }
+
         private bool CandleStickChart_MouseUpEvent(ZedGraphControl sender, System.Windows.Forms.MouseEventArgs e)
         {
             scaling = false;

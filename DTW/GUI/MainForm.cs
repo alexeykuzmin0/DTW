@@ -141,6 +141,7 @@ namespace GUI
             candleStickChart1.GraphPane.XAxis.Scale.Max += center - (min + max) / 2;
             candleStickChart1.ChangeYScale();
             candleStickChart1.AxisChange();
+            candleStickChart1.SelectCandles(start, end);
             candleStickChart1.Invalidate();
         }
     }
