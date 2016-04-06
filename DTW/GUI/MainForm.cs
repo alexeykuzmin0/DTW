@@ -105,6 +105,7 @@ namespace GUI
                 results.Add(new Tuple<int, double>(i, dtw.GetResult()));
             }
             this.results = new List<Tuple<int, int, double>>();
+            listBox1.Items.Clear();
             for (int i = 0; i < 20; ++i)
             {
                 results.Sort((Tuple<int, double> lhs, Tuple<int, double> rhs) =>
