@@ -124,5 +124,24 @@ namespace GUI
                 });
             }
         }
+
+        private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            int selected = listBox1.SelectedIndex;
+            if (selected < 0 || selected >= results.Count)
+            {
+                return;
+            }
+            int start = results[selected].Item1;
+            int end = results[selected].Item2;
+            double center = (start + end) / 2;
+            double min = candleStickChart1.GraphPane.XAxis.Scale.Min;
+            double max = candleStickChart1.GraphPane.XAxis.Scale.Max;
+            candleStickChart1.GraphPane.XAxis.Scale.Min += center - (min + max) / 2;
+            candleStickChart1.GraphPane.XAxis.Scale.Max += center - (min + max) / 2;
+            candleStickChart1.ChangeYScale();
+            candleStickChart1.AxisChange();
+            candleStickChart1.Invalidate();
+        }
     }
 }
